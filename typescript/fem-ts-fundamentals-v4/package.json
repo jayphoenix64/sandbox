@@ -11,7 +11,7 @@
     "url": "git+ssh://git@github.com/jayphoenix64/sandbox.git"
   },
   "author": "jayphoenix64",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jayphoenix64/sandbox/issues"
   },
