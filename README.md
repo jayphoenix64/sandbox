@@ -9,5 +9,6 @@ Currently this repo consists (or will in the future) of different smaller projec
 ### TypeScript Fundamentals v4 from Frontend Masters
 
 TypeScript Fundamentals v4 from Frontend Masters done by [Mike North](https://github.com/mike-north)
+
 [Course Notes](https://www.typescript-training.com/course/fundamentals-v4)
 [Course Repo](https://github.com/mike-north/typescript-courses)
