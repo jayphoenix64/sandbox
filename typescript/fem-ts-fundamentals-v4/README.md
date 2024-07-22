@@ -5,7 +5,13 @@
 
 This repo is a playground for notes and exercises from the TypeSript Fundamentals v4 Course on Frontend Masters.
 
-To compile the files in the src folder use:
+Initialize the project with use:
+
+```bash
+npm install
+```
+
+And compile the files in the src folder with:
 
 ```bash
 npx tsc
