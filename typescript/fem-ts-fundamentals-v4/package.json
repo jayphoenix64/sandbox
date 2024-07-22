@@ -1,0 +1,22 @@
+{
+  "name": "fem-ts-fundamentals-v4",
+  "version": "1.0.0",
+  "description": "sandbox for ts fundamentals v4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jayphoenix64/sandbox.git"
+  },
+  "author": "jayphoenix64",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jayphoenix64/sandbox/issues"
+  },
+  "homepage": "https://github.com/jayphoenix64/sandbox#readme",
+  "devDependencies": {
+    "typescript": "^5.4.3"
+  }
+}
