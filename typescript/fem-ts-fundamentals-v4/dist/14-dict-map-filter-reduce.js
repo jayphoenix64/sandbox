@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //////// no need to modify these ////////
 /////////////////////////////////////////
 // @errors: 7006 7006 7006 7006 7006
-console.clear();
+// console.clear();
 function assertEquals(found, expected, message) {
     if (found !== expected)
         throw new Error(`❌ Assertion failed: ${message}\nexpected: ${expected}\nfound: ${found}`);
@@ -31,11 +31,33 @@ const fruits = {
     cherry: { color: 'red', mass: 5 },
 };
 // Array.prototype.map, but for Dict
-function mapDict(...args) { }
+function mapDict(inputDict, mapFunction) {
+    const outDict = {};
+    for (let k of Object.keys(inputDict)) {
+        const thisVal = inputDict[k];
+        outDict[k] = mapFunction(thisVal, k);
+    }
+    return outDict;
+}
 // Array.prototype.filter, but for Dict
-function filterDict(...args) { }
+function filterDict(inputDict, filterFunction) {
+    const outDict = {};
+    for (let k of Object.keys(inputDict)) {
+        const thisVal = inputDict[k];
+        if (filterFunction(thisVal, k))
+            outDict[k] = thisVal;
+    }
+    return outDict;
+}
 // Array.prototype.reduce, but for Dict
-function reduceDict(...args) { }
+function reduceDict(inputDict, reducerFunction, initialValue) {
+    let value = initialValue;
+    for (let k of Object.keys(inputDict)) {
+        const thisVal = inputDict[k];
+        value = reducerFunction(value, thisVal, k);
+    }
+    return value;
+}
 /////////////////////////////////////////
 ///////////// TEST SUITE ///////////////
 //////// no need to modify these ////////
