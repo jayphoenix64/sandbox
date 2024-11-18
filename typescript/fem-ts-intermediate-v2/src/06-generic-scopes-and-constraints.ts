@@ -5,7 +5,7 @@ const phoneList = [
   { customerId: '0003', areaCode: '192', num: '012-7190' },
   { customerId: '0005', areaCode: '402', num: '652-5782' },
   { customerId: '0004', areaCode: '301', num: '184-8501' },
-]
+];
 const phoneDict = {
   '0001': {
     customerId: '0001',
@@ -18,70 +18,78 @@ const phoneDict = {
     num: '142-3626',
   },
   /*... and so on */
-}
+};
 
-function listToDict<T>(
+function listToDict1<T>(
   list: T[], // array as input
-  idGen: (arg: T) => string, // fn for obtaining item's id
+  idGen: (arg: T) => string // fn for obtaining item's id
 ): { [k: string]: T } {
   // create dict to fill
-  const dict: { [k: string]: T } = {}
+  const dict: { [k: string]: T } = {};
 
   for (let item of list) {
     // for each item
-    dict[idGen(item)] = item // make a key store in dict
+    dict[idGen(item)] = item; // make a key store in dict
   }
 
-  return dict // result
+  return dict; // result
 }
-/*
-// interface HasId {
-//   id: string
-// }
-// interface Dict<T> {
-//   [k: string]: T
-// }
 
-// function listToDict(list: HasId[]): Dict<HasId> {
-//   const dict: Dict<HasId> = {}
+interface HasId {
+  id: string;
+}
+interface Dict<T> {
+  [k: string]: T;
+}
 
-//   list.forEach((item) => {
-//     dict[item.id] = item
-//   })
+function listToDict<T extends HasId>(list: T[]): Dict<T> {
+  const dict: Dict<T> = {};
 
-//   return dict
-// }
+  list.forEach((item) => {
+    dict[item.id] = item;
+  });
 
-/*
+  return dict;
+}
+
 //? Let's make it
 // function listToDict<T>(list: T[]): Dict<T> {
 
 //* Describing the constraint
-/*
 // function listToDict<T extends HasId>(list: T[]): Dict<T> {
 
+interface ColorWithId extends HasId {
+  color: 'blue' | 'green';
+}
+
+const myColors = { id: 'a', color: 'blue' } satisfies ColorWithId; // similar to casting
+const myColors2: ColorWithId = { id: 'a', color: 'blue' };
+
+myColors.color.substring(0, 3);
+myColors2.color.substring(0, 3);
+
 //* Scopes and Type Parameters
-/*
-// function eatApple(bowl: any, eater: (arg: any) => void) {}
 
-// function receiveFruitBasket(bowl: any) {
-//   console.log('Thanks for the fruit basket!')
-//   // only `bowl` can be accessed here
-//   eatApple(bowl, (apple: any) => {
-//     // both `bowl` and `apple` can be accessed here
-//   })
-// }
+function eatApple(bowl: any, eater: (arg: any) => void) {}
 
-// // outer function
-// function tupleCreator<T>(first: T) {
-//   // inner function
-//   return function finish<S>(last: S): [T, S] {
-//     return [first, last]
-//   }
-// }
-// const finishTuple = tupleCreator(3 as const)
-// const t1 = finishTuple(null)
-// const t2 = finishTuple([4, 8, 15, 16, 23, 42])
+function receiveFruitBasket(bowl: any) {
+  console.log('Thanks for the fruit basket!');
+  // only `bowl` can be accessed here
+  eatApple(bowl, (apple: any) => {
+    // both `bowl` and `apple` can be accessed here
+  });
+}
+
+// outer function
+function tupleCreator<T>(first: T) {
+  // inner function
+  return function finish<S>(last: S): [T, S] {
+    return [first, last];
+  };
+}
+const finishTuple = tupleCreator(3 as const);
+const t1 = finishTuple(null);
+const t2 = finishTuple([4, 8, 15, 16, 23, 42]);
 
 //* Best practices
 // interface HasId {
@@ -91,40 +99,40 @@ function listToDict<T>(
 //   [k: string]: T
 // }
 
-// function example1<T extends HasId[]>(list: T) {
-//   return list.pop()
-//   //      ^?
-// }
-// function example2<T extends HasId>(list: T[]) {
-//   return list.pop()
-//   //      ^?
-// }
+function example1<T extends HasId[]>(list: T) {
+  return list.pop()
+  //      ^ HasId | undefined
+}
+function example2<T extends HasId>(list: T[]) {
+  return list.pop()
+  //      ^T | undefined
+}
 
-// class Payment implements HasId {
-//   static #next_id_counter = 1;
-//   id = `pmnt_${Payment.#next_id_counter++}`
-// }
-// class Invoice implements HasId {
-//   static #next_id_counter = 1;
-//   id = `invc_${Invoice.#next_id_counter++}`
-// }
+class Payment implements HasId {
+  static #next_id_counter = 1;
+  id = `pmnt_${Payment.#next_id_counter++}`
+}
+class Invoice implements HasId {
+  static #next_id_counter = 1;
+  id = `invc_${Invoice.#next_id_counter++}`
+}
 
-// const result1 = example1([
-//   //   ^?
-//   new Payment(),
-//   new Invoice(),
-//   new Payment()
-// ])
+const result1 = example1([
+  //   ^?
+  new Payment(),
+  new Invoice(),
+  new Payment()
+])
 
-// const result2 = example2([
-//   //   ^?
-//   new Payment(),
-//   new Invoice(),
-//   new Payment()
-// ])
+const result2 = example2([
+  //   ^?
+  new Payment(),
+  new Invoice(),
+  new Payment()
+])
 
 /**/
 
 console.log('all done.');
 
-export default {}
+export default {};
