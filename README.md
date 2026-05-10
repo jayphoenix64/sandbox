@@ -3,7 +3,6 @@ This is a playground for everything coding.
 
 Currently this repo consists (or will in the future) of different smaller projects usually regarding stuff from courses or tutorials.
 
-
 ## typescript
 
 ### TypeScript Fundamentals v4 from Frontend Masters
